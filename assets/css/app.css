@@ -1,0 +1,14 @@
+/* assets/css/app.css */
+:root {
+  --color-bg: #f3f4f6;
+  --color-text: #111827;
+  --color-card: #ffffff;
+  --color-card-text: #1f2937;
+}
+
+.dark {
+  --color-bg: #111827;
+  --color-text: #f3f4f6;
+  --color-card: #1f2937;
+  --color-card-text: #e5e7eb;
+}
