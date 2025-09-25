@@ -180,7 +180,7 @@
         </div>
         <div class="p-6">
           <div v-if="!productosStockBajo || productosStockBajo.length === 0" class="text-center text-green-600 dark:text-green-400 py-8">
-            ✅ Todo el stock está bien
+             Todo el stock está bien
           </div>
           <div v-else class="space-y-3">
             <div v-for="producto in productosStockBajo" :key="producto._id" 
@@ -287,11 +287,18 @@ const cargando = ref(true)
 
 // Cargar datos del dashboard al montar
 onMounted(async () => {
-  await Promise.all([
-    cargarDashboard(),
-    cargarProductosStockBajo()
-  ])
-  cargando.value = false
+  try {
+    await cargarDashboard()
+    
+    // Pequeño delay para evitar sobrecarga
+    await new Promise(resolve => setTimeout(resolve, 100))
+    
+    await cargarProductosStockBajo()
+  } catch (error) {
+    console.error('Error al cargar datos:', error)
+  } finally {
+    cargando.value = false
+  }
 })
 
 async function cargarDashboard() {
